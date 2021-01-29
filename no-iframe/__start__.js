@@ -1,7 +1,7 @@
 (function () {
     var CANVAS_ID = 'application-canvas';
 
-    var canvas, devices, app;
+    var canvas, devices, app, wrapper;
 
     var createCanvas = function () {
         canvas = document.createElement('canvas');
@@ -12,7 +12,9 @@
         // Disable I-bar cursor on click+drag
         canvas.onselectstart = function () { return false; };
 
-        document.body.appendChild(canvas);
+        // Find the wrapper
+        wrapper = document.getElementById('playcanvas-wrapper');
+        wrapper.appendChild(canvas);
 
         return canvas;
     };
@@ -54,7 +56,7 @@
     };
 
     var reflow = function () {
-        app.resizeCanvas(canvas.width, canvas.height);
+        app.resizeCanvas(wrapper.clientWidth, wrapper.clientHeight);
         canvas.style.width = '';
         canvas.style.height = '';
 
